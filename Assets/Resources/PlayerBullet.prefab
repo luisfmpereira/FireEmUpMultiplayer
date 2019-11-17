@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 114957188431858746}
   - component: {fileID: 6926968834393059794}
   - component: {fileID: -7664489501413803014}
+  - component: {fileID: 7364347685429480978}
   m_Layer: 8
   m_Name: PlayerBullet
   m_TagString: PlayerBullet
@@ -148,10 +149,11 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: -7664489501413803014}
+  - {fileID: 7364347685429480978}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -168,6 +170,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
+  m_SynchronizeAngularVelocity: 1
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &7364347685429480978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966224386960838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0

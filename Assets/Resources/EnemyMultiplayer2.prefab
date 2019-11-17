@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 212137618904852718}
   - component: {fileID: 61075961211150690}
   - component: {fileID: 50933769246208842}
-  - component: {fileID: 114879833702632446}
   - component: {fileID: 2091589068982448531}
+  - component: {fileID: -6976011898393620987}
+  - component: {fileID: -6618057986372867502}
   m_Layer: 12
   m_Name: EnemyMultiplayer2
   m_TagString: Enemy
@@ -130,33 +131,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &114879833702632446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1222616399000558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ee5027532e79a8479f3560c9123dea5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelController: {fileID: 0}
-  enemyScore: 100
-  player: {fileID: 0}
-  moveSpeed: 2
-  bulletPrefab: {fileID: 50169316692934392, guid: 90af17531a083db4d8bc1908a89eab54,
-    type: 3}
-  allowShooting: 1
-  enemyHealth: 1
-  dropChance: 1
-  foodPrefabs:
-  - {fileID: 1825343885232472, guid: b5fdb833609b12a49a2dfdf970c476e9, type: 3}
-  - {fileID: 1825343885232472, guid: 9e54b68e8e5964046a9521fbbfa51ffd, type: 3}
-  - {fileID: 1825343885232472, guid: 79aeca324a9b9684c9ecef812d75d322, type: 3}
-  - {fileID: 1825343885232472, guid: 4fe0ebc27f2f23a45852bb45d0038c84, type: 3}
-  - {fileID: 1825343885232472, guid: eb4785686218db047b9fc6ba683d022b, type: 3}
 --- !u!114 &2091589068982448531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,10 +146,42 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: -6976011898393620987}
+  - {fileID: -6618057986372867502}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-6976011898393620987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222616399000558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+--- !u!114 &-6618057986372867502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222616399000558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3

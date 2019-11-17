@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class EnemyRespawnMultiplayer : MonoBehaviour
 {
-    public float respawnRate = 5f;
+    public float respawnRate = 100f;
     public float respawnCounter;
     public Transform respawnArea;
     public GameObject[] newEnemy;
@@ -25,18 +25,23 @@ public class EnemyRespawnMultiplayer : MonoBehaviour
 
     void Update()
     {
+        if (!PhotonNetwork.IsMasterClient)
+            return;
+            
         respawnCounter -= Time.deltaTime;
 
-        numberOfEnemies = (1 + (int)Time.deltaTime / 50000);
+        numberOfEnemies = 1;
 
         if (respawnCounter <= 0)
         {
             respawnCounter = respawnRate;
-            photonView.RPC("RPCSpawnEnemy", RpcTarget.All, horizontalSpawn, numberOfEnemies);
+            photonView.RPC("RPCSpawnEnemy", RpcTarget.AllViaServer, horizontalSpawn, numberOfEnemies);
 
         }
 
     }
+
+
     [PunRPC]
     void RPCSpawnEnemy(bool horizontal, int amount)
     {
