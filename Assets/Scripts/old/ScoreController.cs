@@ -33,6 +33,8 @@ public class ScoreController : MonoBehaviour {
 		score = 0;
 		shieldIm.enabled = false;
 		bulletIm.enabled = false;
+
+		
 	}
 	
 

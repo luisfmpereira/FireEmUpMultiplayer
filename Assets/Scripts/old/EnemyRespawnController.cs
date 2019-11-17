@@ -22,7 +22,6 @@ public class EnemyRespawnController : MonoBehaviour {
 	}
 
 
-
 	void Update () {
 		levelControllerScore = GameObject.FindGameObjectWithTag ("LevelController").GetComponent<ScoreController> ().score;
 		respawnCounter -= Time.deltaTime;
