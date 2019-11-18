@@ -47,7 +47,6 @@ public class PlayerMovementMultiplayer : MonoBehaviour
             return;
         //move player according to axis inputs
         playerTransf.position = new Vector2(playerTransf.position.x + Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, playerTransf.position.y + Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
-        float speed = Mathf.Abs(Input.GetAxis("Horizontal")) + Mathf.Abs(Input.GetAxis("Vertical"));
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         var dir = mousePos - playerTransf.position;

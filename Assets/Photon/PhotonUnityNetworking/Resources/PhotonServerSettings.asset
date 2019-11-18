@@ -39,5 +39,11 @@ MonoBehaviour:
   - RPCSpawnEnemy
   - RPCMovePlayer
   - RPCPlayerShoot
+  - PunKillEnemy
+  - PunMoveEnemy
+  - PunShootEnemy
+  - RPCKillEnemy
+  - RPCSpawnBullet
+  - RPCShootEnemy
   DisableAutoOpenWizard: 1
   ShowSettings: 1

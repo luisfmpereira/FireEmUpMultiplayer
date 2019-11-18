@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class EnemyRespawnMultiplayer : MonoBehaviour
 {
-    public float respawnRate = 100f;
+    public float respawnRate = 10000f;
     public float respawnCounter;
     public Transform respawnArea;
     public GameObject[] newEnemy;
@@ -18,7 +18,7 @@ public class EnemyRespawnMultiplayer : MonoBehaviour
     void Start()
     {
         photonView = gameObject.GetPhotonView();
-        respawnArea = this.GetComponent<Transform>();
+        respawnArea = this.gameObject.GetComponent<Transform>();
 
     }
 
@@ -27,7 +27,7 @@ public class EnemyRespawnMultiplayer : MonoBehaviour
     {
         if (!PhotonNetwork.IsMasterClient)
             return;
-            
+
         respawnCounter -= Time.deltaTime;
 
         numberOfEnemies = 1;

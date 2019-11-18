@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4645650235093574322}
   - component: {fileID: -5532933170616292457}
   - component: {fileID: 7274742522103487103}
+  - component: {fileID: 3211293035516943588}
   m_Layer: 12
   m_Name: EnemyMultiplayer1
   m_TagString: Enemy
@@ -182,6 +183,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
+  m_SynchronizeAngularVelocity: 1
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &3211293035516943588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342312308010248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfad1052c9c4e2d48a4d444d243172d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyScore: 100
+  playerArray: []
+  player: {fileID: 0}
+  moveSpeed: 1
+  cooldown: 2
+  bulletPrefab: {fileID: 0}
+  allowShooting: 0
+  enemyHealth: 1
+  foodPrefabs: []
+  dropChance: 0

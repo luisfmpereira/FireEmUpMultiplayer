@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 156ca12998c3f804ba4e15a76355abc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnRate: 5
+  respawnRate: 100
   respawnCounter: 0
   respawnArea: {fileID: 0}
   newEnemy:
