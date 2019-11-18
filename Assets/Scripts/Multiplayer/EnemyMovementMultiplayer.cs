@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Realtime;
 using UnityEngine;
 using Photon.Pun;
 
-public class EnemyMovementMultiplayer : MonoBehaviour
+public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
 {
     public int enemyScore = 100;
 
     //move variables
+    public List<GameObject> players = new List<GameObject>();
     public GameObject[] playerArray;
     public GameObject player;
     private Transform enemyTransf;
@@ -26,17 +28,29 @@ public class EnemyMovementMultiplayer : MonoBehaviour
     PhotonView photonView;
 
 
-    void Awake()
+    void Start()
     {
         photonView = gameObject.GetPhotonView();
         enemyTransf = GetComponent<Transform>();
-        playerArray = GameObject.FindGameObjectsWithTag("Player");
+        players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+        player = players[Random.Range(0, players.Count)];
 
         shootingCounter = 0f;
 
-        player = playerArray[Random.Range(0, playerArray.Length)];
+        //playerArray = GameObject.FindGameObjectsWithTag("Player");
     }
 
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+
+        //playerArray = GameObject.FindGameObjectsWithTag("Player");
+        //player = playerArray[Random.Range(0, playerArray.Length)];
+        players.RemoveRange(0, players.Count);
+        players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+        player = players[Random.Range(0, players.Count)];
+
+        base.OnPlayerLeftRoom(otherPlayer);
+    }
 
     void Update()
     {
@@ -57,6 +71,7 @@ public class EnemyMovementMultiplayer : MonoBehaviour
             photonView.RPC("RPCKillEnemy", RpcTarget.All);
     }
 
+
     void MoveEnemy(Vector3 direction)
     {
         enemyTransf.position = Vector2.MoveTowards(enemyTransf.position, player.transform.position, moveSpeed * Time.deltaTime);
@@ -70,8 +85,8 @@ public class EnemyMovementMultiplayer : MonoBehaviour
     [PunRPC]
     void RPCShootEnemy(Vector3 direction)
     {
-        if (!photonView.IsMine)
-            return;
+        /*if (!photonView.IsMine)
+            return;*/
 
         if (shootingCounter >= cooldown)
         {
@@ -90,7 +105,7 @@ public class EnemyMovementMultiplayer : MonoBehaviour
     {
         if (!photonView.IsMine)
             return;
-            
+
         float drop = Random.Range(0, 10);
         /*
         var foodOfChoice = Random.Range(0, foodPrefabs.Length);

@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyScore: 100
+  players: []
   playerArray: []
   player: {fileID: 0}
   moveSpeed: 1

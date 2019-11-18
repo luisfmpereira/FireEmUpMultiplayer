@@ -23,7 +23,7 @@ public class PlayerMovementMultiplayer : MonoBehaviour
     public float fireCooldown = 0.5f;
     private float fireTimer = 0;
 
-    void Start()
+    void OnEnable()
     {
         photonView = gameObject.GetPhotonView();
         playerTransf = GetComponent<Transform>();
@@ -34,6 +34,8 @@ public class PlayerMovementMultiplayer : MonoBehaviour
 
     void Update()
     {
+        if (!photonView.IsMine)
+            return;
         fireTimer -= Time.deltaTime;
         photonView.RPC("RPCMovePlayer", RpcTarget.All);
         photonView.RPC("RPCPlayerShoot", RpcTarget.All);
@@ -60,6 +62,7 @@ public class PlayerMovementMultiplayer : MonoBehaviour
     {
         if (!photonView.IsMine)
             return;
+
         var dir = mousePos - playerTransf.position;
 
         if (Input.GetButton("Fire1") && fireTimer <= 0)

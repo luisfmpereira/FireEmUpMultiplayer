@@ -15,7 +15,7 @@ public class EnemyRespawnMultiplayer : MonoBehaviour
 
     PhotonView photonView;
 
-    void Start()
+    void OnEnable()
     {
         photonView = gameObject.GetPhotonView();
         respawnArea = this.gameObject.GetComponent<Transform>();

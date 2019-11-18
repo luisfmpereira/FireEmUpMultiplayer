@@ -20,8 +20,9 @@ namespace Photon.Pun.UtilityScripts
     /// <summary>
     /// This component will instantiate a network GameObject when a room is joined
     /// </summary>
-	public class OnJoinedInstantiate : MonoBehaviour , IConnectionCallbacks , IMatchmakingCallbacks , ILobbyCallbacks
+	public class OnJoinedInstantiate : MonoBehaviour, IConnectionCallbacks, IMatchmakingCallbacks, ILobbyCallbacks
     {
+        public GameObject[] playerPrefabs;
         public Transform SpawnPosition;
         public float PositionOffset = 2.0f;
         public GameObject[] PrefabsToInstantiate; // set in inspector
@@ -35,7 +36,13 @@ namespace Photon.Pun.UtilityScripts
         {
             PhotonNetwork.RemoveCallbackTarget(this);
         }
-
+        public void AddPrefabToList(int value)
+        {
+            if (value == 1)
+                this.PrefabsToInstantiate[0] = playerPrefabs[0];
+            else
+                this.PrefabsToInstantiate[0] = playerPrefabs[1];
+        }
         public void OnJoinedRoom()
         {
             if (this.PrefabsToInstantiate != null)
@@ -64,19 +71,19 @@ namespace Photon.Pun.UtilityScripts
         {
         }
 
-		public void OnCustomAuthenticationResponse (Dictionary<string, object> data)
-		{
-		}
+        public void OnCustomAuthenticationResponse(Dictionary<string, object> data)
+        {
+        }
 
-		public void OnCustomAuthenticationFailed (string debugMessage)
-		{
-		}
+        public void OnCustomAuthenticationFailed(string debugMessage)
+        {
+        }
 
         public void OnConnectedToMaster()
         {
         }
 
-		public void OnDisconnected(DisconnectCause cause)
+        public void OnDisconnected(DisconnectCause cause)
         {
         }
 
@@ -100,9 +107,9 @@ namespace Photon.Pun.UtilityScripts
         {
         }
 
-		public void OnLobbyStatisticsUpdate (List<TypedLobbyInfo> lobbyStatistics)
-		{
-		}
+        public void OnLobbyStatisticsUpdate(List<TypedLobbyInfo> lobbyStatistics)
+        {
+        }
 
         public void OnCreatedRoom()
         {
