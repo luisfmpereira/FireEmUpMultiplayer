@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class PhotonController : MonoBehaviourPunCallbacks
 {
-    PhotonView thisPhotonView;
+    PhotonView photonView;
 
     public GameObject startCanvas;
     public GameObject gameCanvas;
@@ -18,7 +18,7 @@ public class PhotonController : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        thisPhotonView = gameObject.GetPhotonView();
+        photonView = gameObject.GetPhotonView();
 
         startCanvas.SetActive(true);
         gameCanvas.SetActive(false);
@@ -28,11 +28,11 @@ public class PhotonController : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         startCanvas.SetActive(false);
-        gameCanvas.SetActive(false);
+        gameCanvas.SetActive(true);
         waitingCanvas.SetActive(true);
 
         if (PhotonNetwork.PlayerList.Length > 1)
-            thisPhotonView.RPC("RPCStartMatch", RpcTarget.AllViaServer);
+            photonView.RPC("RPCStartMatch", RpcTarget.AllViaServer);
 
         base.OnJoinedRoom();
     }
@@ -40,7 +40,7 @@ public class PhotonController : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         startCanvas.SetActive(false);
-        gameCanvas.SetActive(false);
+        gameCanvas.SetActive(true);
         waitingCanvas.SetActive(true);
         base.OnPlayerLeftRoom(otherPlayer);
     }
@@ -53,19 +53,26 @@ public class PhotonController : MonoBehaviourPunCallbacks
         waitingCanvas.SetActive(false);
 
         if (PhotonNetwork.IsMasterClient)
-            photonView.RPC("RPCStartSpawns", RpcTarget.All);
+            StartSpawns();
+        //photonView.RPC("RPCStartSpawns", RpcTarget.All);
     }
-    [PunRPC]
-    public void RPCStartSpawns()
+
+    public void StartSpawns()
     {
-
-
         PhotonNetwork.Instantiate("EnemyRespawnHorizontal", spawns[0].position, Quaternion.identity);
         PhotonNetwork.Instantiate("EnemyRespawnHorizontal", spawns[1].position, Quaternion.identity);
         PhotonNetwork.Instantiate("EnemyRespawnVertical", spawns[2].position, Quaternion.identity);
         PhotonNetwork.Instantiate("EnemyRespawnVertical", spawns[3].position, Quaternion.identity);
-
     }
+
+    /*[PunRPC]
+    public void RPCStartSpawns()
+    {
+        PhotonNetwork.Instantiate("EnemyRespawnHorizontal", spawns[0].position, Quaternion.identity);
+        PhotonNetwork.Instantiate("EnemyRespawnHorizontal", spawns[1].position, Quaternion.identity);
+        PhotonNetwork.Instantiate("EnemyRespawnVertical", spawns[2].position, Quaternion.identity);
+        PhotonNetwork.Instantiate("EnemyRespawnVertical", spawns[3].position, Quaternion.identity);
+    }*/
 
 
 

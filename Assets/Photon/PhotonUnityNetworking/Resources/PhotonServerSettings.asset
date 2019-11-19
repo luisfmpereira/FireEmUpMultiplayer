@@ -45,5 +45,6 @@ MonoBehaviour:
   - RPCKillEnemy
   - RPCSpawnBullet
   - RPCShootEnemy
+  - RPCDropFood
   DisableAutoOpenWizard: 1
   ShowSettings: 1

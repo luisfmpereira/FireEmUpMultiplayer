@@ -18,13 +18,16 @@ public class PlayerMovementMultiplayer : MonoBehaviour
     private float angle;
 
     //shooting
-    public Rigidbody2D bulletPrefab;
     public Transform muzzlePosition;
     public float fireCooldown = 0.5f;
     private float fireTimer = 0;
+    public bool isDead;
+
+    PlayerHealthMultiplayer playerHealthMultiplayer;
 
     void OnEnable()
     {
+        playerHealthMultiplayer = this.GetComponent<PlayerHealthMultiplayer>();
         photonView = gameObject.GetPhotonView();
         playerTransf = GetComponent<Transform>();
         playerRB = GetComponent<Rigidbody2D>();
@@ -34,8 +37,10 @@ public class PlayerMovementMultiplayer : MonoBehaviour
 
     void Update()
     {
-        if (!photonView.IsMine)
+        isDead = playerHealthMultiplayer.isDead;
+        if (!photonView.IsMine || isDead)
             return;
+
         fireTimer -= Time.deltaTime;
         photonView.RPC("RPCMovePlayer", RpcTarget.All);
         photonView.RPC("RPCPlayerShoot", RpcTarget.All);

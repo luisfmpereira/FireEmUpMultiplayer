@@ -207,5 +207,11 @@ MonoBehaviour:
   bulletPrefab: {fileID: 0}
   allowShooting: 1
   enemyHealth: 1
-  foodPrefabs: []
-  dropChance: 0
+  foodPrefabs:
+  - {fileID: 1825343885232472, guid: 5fc6a189dda64f44a80b743705cb1d27, type: 3}
+  - {fileID: 1825343885232472, guid: ee8c0a483a3b85341bac9a56f15bb941, type: 3}
+  - {fileID: 1825343885232472, guid: fb57496a867d46549bc46ddb8d0d7cf2, type: 3}
+  - {fileID: 1825343885232472, guid: 11e6719d558bbe04d98d051d83c669b1, type: 3}
+  - {fileID: 1825343885232472, guid: 973da153ece51d349a826a0ba621a400, type: 3}
+  - {fileID: 1825343885232472, guid: 690f2538da9871e4cb376a306ad47d32, type: 3}
+  dropChance: 0.3

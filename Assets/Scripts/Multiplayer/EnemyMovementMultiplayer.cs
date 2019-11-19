@@ -24,7 +24,7 @@ public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
     //health and drops
     public int enemyHealth = 1;
     public GameObject[] foodPrefabs;
-    public float dropChance;
+    public float dropChance = 0.3f;
     PhotonView photonView;
 
 
@@ -40,7 +40,7 @@ public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
         //playerArray = GameObject.FindGameObjectsWithTag("Player");
     }
 
-    public override void OnPlayerLeftRoom(Player otherPlayer)
+    public void OnPlayerDisconnected(Player otherPlayer)
     {
 
         //playerArray = GameObject.FindGameObjectsWithTag("Player");
@@ -56,14 +56,16 @@ public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
     {
         var direction = (player.transform.position - enemyTransf.position);
 
+        //if (player == null)
+        //    player = players[Random.Range(0, players.Count)];
+
         MoveEnemy(direction);
 
 
         if (allowShooting)
         {
             shootingCounter += Time.deltaTime;
-
-            //ShootEnemy();
+            //ShootEnemy(direction);
             photonView.RPC("RPCShootEnemy", RpcTarget.All, direction);
         }
 
@@ -81,24 +83,31 @@ public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
 
         enemyTransf.rotation = Quaternion.Euler(0f, 0f, angle);
     }
+    
+    /*
+        void ShootEnemy(Vector3 direction)
+        {
+            if (shootingCounter >= cooldown)
+            {
+                shootingCounter = 0;
+                PhotonNetwork.Instantiate("EnemyBullet", this.transform.position, this.transform.rotation).gameObject.
+                GetComponent<Rigidbody2D>().AddForce(300 * new Vector2(direction.x, direction.y).normalized);
+            }
+        }
+    */
+
 
     [PunRPC]
     void RPCShootEnemy(Vector3 direction)
     {
-        /*if (!photonView.IsMine)
-            return;*/
-
         if (shootingCounter >= cooldown)
         {
             shootingCounter = 0;
-            /*
-            var bullet = Instantiate(bulletPrefab, enemyTransf.position, enemyTransf.rotation) as Rigidbody2D;
-            bullet.AddForce(300 * new Vector2(direction.x, direction.y).normalized);
-            */
             PhotonNetwork.Instantiate("EnemyBullet", this.transform.position, this.transform.rotation).gameObject.
             GetComponent<Rigidbody2D>().AddForce(300 * new Vector2(direction.x, direction.y).normalized);
         }
     }
+
 
     [PunRPC]
     void RPCKillEnemy()
@@ -106,21 +115,20 @@ public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
         if (!photonView.IsMine)
             return;
 
-        float drop = Random.Range(0, 10);
-        /*
-        var foodOfChoice = Random.Range(0, foodPrefabs.Length);
-
-         if (drop <= dropChance)
-         {
-             GameObject food = Instantiate(foodPrefabs[foodOfChoice], this.transform.position, Quaternion.identity);
-             Destroy(food.gameObject, 5);
-         }
-        */
-
+        photonView.RPC("RPCDropFood", RpcTarget.All);
         PhotonNetwork.Destroy(this.gameObject);
-
     }
 
+    [PunRPC]
+    void RPCDropFood()
+    {
+        float drop = Random.Range(0, 10);
+        var foodOfChoice = Random.Range(0, foodPrefabs.Length);
+
+        if (drop <= dropChance)
+            PhotonNetwork.Instantiate(foodPrefabs[foodOfChoice].ToString(), this.transform.position, Quaternion.identity);
+
+    }
 
     void OnTriggerEnter2D(Collider2D hit)
     {

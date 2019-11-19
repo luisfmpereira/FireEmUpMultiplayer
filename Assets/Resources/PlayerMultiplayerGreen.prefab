@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: -654347701218634696}
   - component: {fileID: -2738945508906597059}
   - component: {fileID: 2436510573209894232}
+  - component: {fileID: 2171372567199745032}
   m_Layer: 10
   m_Name: PlayerMultiplayerGreen
   m_TagString: Player
@@ -173,9 +174,9 @@ MonoBehaviour:
   playerAnim: {fileID: 0}
   moveSpeed: 5
   cam: {fileID: 0}
-  bulletPrefab: {fileID: 0}
   muzzlePosition: {fileID: 4328499858939300}
   fireCooldown: 0.5
+  isDead: 0
 --- !u!114 &-5148723891920927653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,6 +248,21 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &2171372567199745032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062501763601134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f686d36c9d76c4584140cf63148b87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  isDead: 0
+  healthText: {fileID: 0}
 --- !u!1 &1454208215759098
 GameObject:
   m_ObjectHideFlags: 0

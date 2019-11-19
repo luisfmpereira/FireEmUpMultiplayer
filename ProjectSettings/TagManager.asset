@@ -11,6 +11,7 @@ TagManager:
   - LevelController
   - Shield
   - UltKillzone
+  - HealthText
   layers:
   - Default
   - TransparentFX
