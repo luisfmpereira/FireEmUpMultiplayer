@@ -12,7 +12,7 @@ public class PhotonController : MonoBehaviourPunCallbacks
     public GameObject startCanvas;
     public GameObject gameCanvas;
     public GameObject waitingCanvas;
-
+    public GameObject otherDeadCanvas;
 
     public Transform[] spawns;
 

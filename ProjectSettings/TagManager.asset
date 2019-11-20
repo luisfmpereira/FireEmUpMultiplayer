@@ -12,6 +12,8 @@ TagManager:
   - Shield
   - UltKillzone
   - HealthText
+  - PhotonController
+  - OtherDeadCanvas
   layers:
   - Default
   - TransparentFX

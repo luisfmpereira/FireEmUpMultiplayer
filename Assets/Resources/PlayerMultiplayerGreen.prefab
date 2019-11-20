@@ -263,6 +263,8 @@ MonoBehaviour:
   maxHealth: 10
   isDead: 0
   healthText: {fileID: 0}
+  otherPlayerDead: 0
+  otherDeadCanvas: {fileID: 0}
 --- !u!1 &1454208215759098
 GameObject:
   m_ObjectHideFlags: 0

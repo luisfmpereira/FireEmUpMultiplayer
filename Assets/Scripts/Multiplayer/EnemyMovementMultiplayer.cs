@@ -83,7 +83,7 @@ public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
 
         enemyTransf.rotation = Quaternion.Euler(0f, 0f, angle);
     }
-    
+
     /*
         void ShootEnemy(Vector3 direction)
         {
@@ -115,18 +115,18 @@ public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
         if (!photonView.IsMine)
             return;
 
-        photonView.RPC("RPCDropFood", RpcTarget.All);
+        //photonView.RPC("RPCDropFood", RpcTarget.All);
+        DropFood();
         PhotonNetwork.Destroy(this.gameObject);
     }
 
-    [PunRPC]
-    void RPCDropFood()
+    public void DropFood()
     {
-        float drop = Random.Range(0, 10);
-        var foodOfChoice = Random.Range(0, foodPrefabs.Length);
+        float drop = Random.Range(0, 1);
 
         if (drop <= dropChance)
-            PhotonNetwork.Instantiate(foodPrefabs[foodOfChoice].ToString(), this.transform.position, Quaternion.identity);
+            Instantiate(foodPrefabs[0], this.transform.position, Quaternion.identity);
+        //PhotonNetwork.Instantiate("Health1Pack", this.transform.position, Quaternion.identity);
 
     }
 
@@ -135,4 +135,6 @@ public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
         if (hit.gameObject.CompareTag("PlayerBullet"))
             enemyHealth--;
     }
+
+
 }

@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4882558342348004}
   - component: {fileID: 212872500048610290}
-  - component: {fileID: 61603295952070176}
-  - component: {fileID: -1905506837641078974}
-  - component: {fileID: -5842352422086359205}
-  m_Layer: 0
-  m_Name: Health5
+  - component: {fileID: 61843990042310132}
+  - component: {fileID: -1927358120932722507}
+  - component: {fileID: -591232789085530181}
+  - component: {fileID: -3545051608274270956}
+  m_Layer: 10
+  m_Name: Health1Pack
   m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1825343885232472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.952953, y: -2.63328, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -71,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: -1943878751
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300010, guid: 649d29e3db95f1748ade6e05a608b9e9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 649d29e3db95f1748ade6e05a608b9e9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -82,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &61603295952070176
+--- !u!61 &61843990042310132
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,16 +100,28 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.09375, y: 0.75}
+    oldSize: {x: 0.84375, y: 0.96875}
     newSize: {x: 0.27, y: 0.31}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.09375, y: 0.75}
+  m_Size: {x: 0.84375, y: 0.96875}
   m_EdgeRadius: 0
---- !u!114 &-1905506837641078974
+--- !u!114 &-1927358120932722507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825343885232472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b480627dfae15241ba858fe97b451ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-591232789085530181
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,11 +139,11 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: -5842352422086359205}
+  - {fileID: -3545051608274270956}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-5842352422086359205
+--- !u!114 &-3545051608274270956
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
