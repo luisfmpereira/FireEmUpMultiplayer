@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealthMultiplayer : MonoBehaviour
 {
@@ -12,14 +13,15 @@ public class PlayerHealthMultiplayer : MonoBehaviour
     public bool isDead;
     public Text healthText;
     public bool otherPlayerDead;
-
     public GameObject otherDeadCanvas;
-
     PhotonView photonView;
+
+    PhotonController photonController;
 
     private void Start()
     {
         photonView = gameObject.GetPhotonView();
+        photonController = GameObject.FindGameObjectWithTag("PhotonController").GetComponent<PhotonController>();
         currentHealth = maxHealth;
         healthText = GameObject.FindGameObjectWithTag("HealthText").GetComponent<Text>();
         UpdateHealth(0);
@@ -27,37 +29,40 @@ public class PlayerHealthMultiplayer : MonoBehaviour
         otherDeadCanvas.SetActive(false);
     }
 
-    public void PlayerDead()
-    {
-        photonView.RPC("RPCOtherPlayerDead", RpcTarget.Others);
-        isDead = true;
-    }
 
-    [PunRPC]
-    void RPCOtherPlayerDead()
-    {
-        otherPlayerDead = true;
-    }
 
     private void Update()
     {
-        if (otherPlayerDead)
-            otherDeadCanvas.SetActive(true);
-        else
+        if (!otherPlayerDead)
             otherDeadCanvas.SetActive(false);
+
+
+        if (currentHealth <= 0)
+        {
+            PlayerDead();
+            if (!photonView.IsMine)
+                otherDeadCanvas.SetActive(true);
+        }
     }
 
     private void UpdateHealth(int healthValue)
     {
         currentHealth += healthValue;
-        if (currentHealth <= 0)
-        {
-            PlayerDead();
-            photonView.RPC("RPCOtherPlayerDead", RpcTarget.Others);
-        }
+
         if (photonView.IsMine)
             healthText.text = "HP: " + currentHealth.ToString();
+
+        if (currentHealth <= 0)
+        {
+            photonController.playersDead++;
+        }
     }
+
+    public void PlayerDead()
+    {
+        isDead = true;
+    }
+
 
     private void OnCollisionEnter2D(Collision2D hit)
     {
@@ -70,6 +75,7 @@ public class PlayerHealthMultiplayer : MonoBehaviour
         {
             UpdateHealth(10);
             isDead = false;
+            photonController.playersDead--;
         }
     }
     private void OnTriggerEnter2D(Collider2D hit)
@@ -77,6 +83,7 @@ public class PlayerHealthMultiplayer : MonoBehaviour
         if (!isDead && hit.gameObject.CompareTag("EnemyBullet"))
         {
             UpdateHealth(-1);
+            Destroy(hit.gameObject);
         }
 
         if (!isDead && hit.gameObject.CompareTag("Food"))
@@ -86,5 +93,8 @@ public class PlayerHealthMultiplayer : MonoBehaviour
         }
 
     }
+
+
+
 
 }

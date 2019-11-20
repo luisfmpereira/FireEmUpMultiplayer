@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Realtime;
 using Photon.Pun;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PhotonController : MonoBehaviourPunCallbacks
 {
@@ -13,8 +14,11 @@ public class PhotonController : MonoBehaviourPunCallbacks
     public GameObject gameCanvas;
     public GameObject waitingCanvas;
     public GameObject otherDeadCanvas;
-
     public Transform[] spawns;
+
+    public int playersDead;
+
+
 
     void Start()
     {
@@ -74,6 +78,18 @@ public class PhotonController : MonoBehaviourPunCallbacks
         PhotonNetwork.Instantiate("EnemyRespawnVertical", spawns[3].position, Quaternion.identity);
     }*/
 
+    private void Update()
+    {
+        if (playersDead >= 2)
+            photonView.RPC("RPCRestartGame", RpcTarget.AllViaServer);
+    }
 
 
+    [PunRPC]
+    public void RPCRestartGame()
+    {
+        Debug.Log("All dead");
+        SceneManager.LoadScene(0);
+        PhotonNetwork.Disconnect();
+    }
 }

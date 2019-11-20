@@ -10,7 +10,6 @@ public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
 
     //move variables
     public List<GameObject> players = new List<GameObject>();
-    public GameObject[] playerArray;
     public GameObject player;
     private Transform enemyTransf;
     public float moveSpeed = 1f;
@@ -27,46 +26,55 @@ public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
     public float dropChance = 0.3f;
     PhotonView photonView;
 
+    public GameObject target;
+    public Vector3 direction;
+
 
     void Start()
     {
         photonView = gameObject.GetPhotonView();
         enemyTransf = GetComponent<Transform>();
-        players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
-        player = players[Random.Range(0, players.Count)];
-
         shootingCounter = 0f;
+        target = FindClosestPlayer();
 
-        //playerArray = GameObject.FindGameObjectsWithTag("Player");
+        //photonView.RPC("RPCSelectTarget", RpcTarget.All);
+        //players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
     }
 
-    public void OnPlayerDisconnected(Player otherPlayer)
+    public GameObject FindClosestPlayer()
     {
-
-        //playerArray = GameObject.FindGameObjectsWithTag("Player");
-        //player = playerArray[Random.Range(0, playerArray.Length)];
-        players.RemoveRange(0, players.Count);
-        players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
-        player = players[Random.Range(0, players.Count)];
-
-        base.OnPlayerLeftRoom(otherPlayer);
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("Player");
+        GameObject closest = null;
+        float distance = Mathf.Infinity;
+        Vector3 position = transform.position;
+        foreach (GameObject go in gos)
+        {
+            Vector3 diff = go.transform.position - position;
+            float curDistance = diff.sqrMagnitude;
+            if (curDistance < distance && !go.gameObject.GetComponent<PlayerHealthMultiplayer>().isDead)
+            {
+                closest = go;
+                distance = curDistance;
+                direction = go.transform.position - enemyTransf.position;
+            }
+        }
+        return closest;
     }
+
 
     void Update()
     {
-        var direction = (player.transform.position - enemyTransf.position);
+        target = FindClosestPlayer();
 
-        //if (player == null)
-        //    player = players[Random.Range(0, players.Count)];
-
-        MoveEnemy(direction);
+        MoveEnemy(target, direction);
 
 
         if (allowShooting)
         {
             shootingCounter += Time.deltaTime;
-            //ShootEnemy(direction);
-            photonView.RPC("RPCShootEnemy", RpcTarget.All, direction);
+            ShootEnemy(target, direction);
+            //photonView.RPC("RPCShootEnemy", RpcTarget.All, direction);
         }
 
         if (enemyHealth <= 0)
@@ -74,37 +82,34 @@ public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
     }
 
 
-    void MoveEnemy(Vector3 direction)
+    void MoveEnemy(GameObject player, Vector3 dir)
     {
         enemyTransf.position = Vector2.MoveTowards(enemyTransf.position, player.transform.position, moveSpeed * Time.deltaTime);
 
         //rotate enemy sprite towards player
-        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
         enemyTransf.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
-    /*
-        void ShootEnemy(Vector3 direction)
-        {
-            if (shootingCounter >= cooldown)
-            {
-                shootingCounter = 0;
-                PhotonNetwork.Instantiate("EnemyBullet", this.transform.position, this.transform.rotation).gameObject.
-                GetComponent<Rigidbody2D>().AddForce(300 * new Vector2(direction.x, direction.y).normalized);
-            }
-        }
-    */
-
-
     [PunRPC]
-    void RPCShootEnemy(Vector3 direction)
+    void RPCShootEnemy(GameObject player, Vector3 dir)
     {
         if (shootingCounter >= cooldown)
         {
             shootingCounter = 0;
             PhotonNetwork.Instantiate("EnemyBullet", this.transform.position, this.transform.rotation).gameObject.
-            GetComponent<Rigidbody2D>().AddForce(300 * new Vector2(direction.x, direction.y).normalized);
+            GetComponent<Rigidbody2D>().AddForce(300 * new Vector2(dir.x, dir.y).normalized);
+        }
+    }
+
+    void ShootEnemy(GameObject player, Vector3 dir)
+    {
+        if (shootingCounter >= cooldown)
+        {
+            shootingCounter = 0;
+            Instantiate(bulletPrefab, this.transform.position, this.transform.rotation).gameObject.
+            GetComponent<Rigidbody2D>().AddForce(300 * new Vector2(dir.x, dir.y).normalized);
         }
     }
 

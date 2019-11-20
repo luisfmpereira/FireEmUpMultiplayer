@@ -200,11 +200,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyScore: 100
   players: []
-  playerArray: []
   player: {fileID: 0}
   moveSpeed: 1
   cooldown: 2
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 50169316692934392, guid: 0cf8fba43ce776d4c89eaf5db62c7f90,
+    type: 3}
   allowShooting: 0
   enemyHealth: 1
   foodPrefabs:
@@ -214,4 +214,6 @@ MonoBehaviour:
   - {fileID: 1825343885232472, guid: 11e6719d558bbe04d98d051d83c669b1, type: 3}
   - {fileID: 1825343885232472, guid: 973da153ece51d349a826a0ba621a400, type: 3}
   - {fileID: 1825343885232472, guid: 690f2538da9871e4cb376a306ad47d32, type: 3}
-  dropChance: 1
+  dropChance: 0.3
+  target: {fileID: 0}
+  direction: {x: 0, y: 0, z: 0}
