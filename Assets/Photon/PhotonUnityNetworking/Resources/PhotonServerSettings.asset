@@ -50,5 +50,6 @@ MonoBehaviour:
   - RPCOtherPlayerDead
   - RPCRestartGame
   - RPCSelectTarget
+  - RPCUpdateScore
   DisableAutoOpenWizard: 1
   ShowSettings: 1

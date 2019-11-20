@@ -28,6 +28,7 @@ public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
 
     public GameObject target;
     public Vector3 direction;
+    PhotonController photonController;
 
 
     void Start()
@@ -36,9 +37,8 @@ public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
         enemyTransf = GetComponent<Transform>();
         shootingCounter = 0f;
         target = FindClosestPlayer();
+        photonController = GameObject.FindGameObjectWithTag("PhotonController").GetComponent<PhotonController>();
 
-        //photonView.RPC("RPCSelectTarget", RpcTarget.All);
-        //players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
     }
 
     public GameObject FindClosestPlayer()
@@ -122,6 +122,7 @@ public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
 
         //photonView.RPC("RPCDropFood", RpcTarget.All);
         DropFood();
+        photonController.UpdateScore();
         PhotonNetwork.Destroy(this.gameObject);
     }
 

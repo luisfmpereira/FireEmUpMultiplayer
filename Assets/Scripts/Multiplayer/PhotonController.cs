@@ -15,6 +15,8 @@ public class PhotonController : MonoBehaviourPunCallbacks
     public GameObject waitingCanvas;
     public GameObject otherDeadCanvas;
     public Transform[] spawns;
+    public Text scoreText;
+    public int scoreValue;
 
     public int playersDead;
 
@@ -23,6 +25,9 @@ public class PhotonController : MonoBehaviourPunCallbacks
     void Start()
     {
         photonView = gameObject.GetPhotonView();
+
+        scoreValue = 0;
+        scoreText.text = "Score: " + scoreValue.ToString();
 
         startCanvas.SetActive(true);
         gameCanvas.SetActive(false);
@@ -91,5 +96,18 @@ public class PhotonController : MonoBehaviourPunCallbacks
         Debug.Log("All dead");
         SceneManager.LoadScene(0);
         PhotonNetwork.Disconnect();
+    }
+
+    public void UpdateScore()
+    {
+        photonView.RPC("RPCUpdateScore", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void RPCUpdateScore()
+    {
+        scoreValue++;
+        scoreText.text = "Score: " + scoreValue.ToString();
+
     }
 }
