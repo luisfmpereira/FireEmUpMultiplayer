@@ -14,6 +14,8 @@ TagManager:
   - HealthText
   - PhotonController
   - OtherDeadCanvas
+  - NukeDrop
+  - NewWeapon
   layers:
   - Default
   - TransparentFX

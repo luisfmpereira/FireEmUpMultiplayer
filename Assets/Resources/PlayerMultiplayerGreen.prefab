@@ -177,6 +177,8 @@ MonoBehaviour:
   muzzlePosition: {fileID: 4328499858939300}
   fireCooldown: 0.5
   isDead: 0
+  isShotgun: 0
+  shotgunTimer: 0
 --- !u!114 &-5148723891920927653
 MonoBehaviour:
   m_ObjectHideFlags: 0
