@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4882558342348004}
   - component: {fileID: 212872500048610290}
   - component: {fileID: 61915938669950322}
-  - component: {fileID: 5832400174872509908}
   - component: {fileID: -8314204293875092400}
   - component: {fileID: 6913073149591875083}
+  - component: {fileID: 5832400174872509908}
   m_Layer: 10
   m_Name: DropNewWeapon
   m_TagString: NewWeapon
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300004, guid: 649d29e3db95f1748ade6e05a608b9e9, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -109,18 +109,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.09375, y: 0.9375}
   m_EdgeRadius: 0
---- !u!114 &5832400174872509908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1825343885232472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b480627dfae15241ba858fe97b451ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-8314204293875092400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,3 +146,15 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &5832400174872509908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825343885232472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b480627dfae15241ba858fe97b451ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

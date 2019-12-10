@@ -139,7 +139,7 @@ public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
 
     void OnTriggerEnter2D(Collider2D hit)
     {
-        if (hit.gameObject.CompareTag("PlayerBullet"))
+        if (hit.gameObject.CompareTag("PlayerBullet") || hit.gameObject.CompareTag("UltKillzone"))
             enemyHealth--;
     }
 

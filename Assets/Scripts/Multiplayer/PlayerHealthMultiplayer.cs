@@ -99,6 +99,11 @@ public class PlayerHealthMultiplayer : MonoBehaviour
             playerMovementMultiplayer.StartShotgun();
             Destroy(hit.gameObject);
         }
+
+        if (!isDead && hit.gameObject.CompareTag("NukeDrop"))
+        {
+            hit.GetComponent<NukeDropManager>().ActivateNuke();
+        }
     }
 
 

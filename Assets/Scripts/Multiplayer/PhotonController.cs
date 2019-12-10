@@ -40,7 +40,7 @@ public class PhotonController : MonoBehaviourPunCallbacks
         gameCanvas.SetActive(true);
         waitingCanvas.SetActive(true);
 
-        if (PhotonNetwork.PlayerList.Length > 1)
+        if (PhotonNetwork.PlayerList.Length > 0)
             photonView.RPC("RPCStartMatch", RpcTarget.AllViaServer);
 
         base.OnJoinedRoom();
