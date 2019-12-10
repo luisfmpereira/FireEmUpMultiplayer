@@ -15,8 +15,8 @@ public class PlayerHealthMultiplayer : MonoBehaviour
     public bool otherPlayerDead;
     public GameObject otherDeadCanvas;
     PhotonView photonView;
-
     PhotonController photonController;
+    PlayerMovementMultiplayer playerMovementMultiplayer;
 
     private void Start()
     {
@@ -27,6 +27,8 @@ public class PlayerHealthMultiplayer : MonoBehaviour
         UpdateHealth(0);
         otherDeadCanvas = GameObject.FindGameObjectWithTag("OtherDeadCanvas").transform.GetChild(0).gameObject;
         otherDeadCanvas.SetActive(false);
+        playerMovementMultiplayer = this.GetComponent<PlayerMovementMultiplayer>();
+
     }
 
 
@@ -92,6 +94,11 @@ public class PlayerHealthMultiplayer : MonoBehaviour
             Destroy(hit.gameObject);
         }
 
+        if (!isDead && hit.gameObject.CompareTag("NewWeapon"))
+        {
+            playerMovementMultiplayer.StartShotgun();
+            Destroy(hit.gameObject);
+        }
     }
 
 

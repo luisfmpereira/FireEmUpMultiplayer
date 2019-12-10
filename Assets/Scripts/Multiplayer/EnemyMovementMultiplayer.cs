@@ -129,9 +129,10 @@ public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
     public void DropFood()
     {
         float drop = Random.Range(0, 1);
+        int selectedDrop = Random.Range(0, foodPrefabs.Length);
 
         if (drop <= dropChance)
-            Instantiate(foodPrefabs[0], this.transform.position, Quaternion.identity);
+            Instantiate(foodPrefabs[selectedDrop], this.transform.position, Quaternion.identity);
         //PhotonNetwork.Instantiate("Health1Pack", this.transform.position, Quaternion.identity);
 
     }

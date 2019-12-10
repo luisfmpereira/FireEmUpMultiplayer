@@ -22,6 +22,8 @@ public class PlayerMovementMultiplayer : MonoBehaviour
     public float fireCooldown = 0.5f;
     private float fireTimer = 0;
     public bool isDead;
+    public bool isShotgun;
+    public float shotgunTimer;
 
     PlayerHealthMultiplayer playerHealthMultiplayer;
 
@@ -45,6 +47,11 @@ public class PlayerMovementMultiplayer : MonoBehaviour
         photonView.RPC("RPCMovePlayer", RpcTarget.All);
         photonView.RPC("RPCPlayerShoot", RpcTarget.All);
 
+        if (isShotgun)
+            shotgunTimer -= Time.deltaTime;
+
+        if (shotgunTimer <= 0)
+            isShotgun = false;
     }
 
     [PunRPC]
@@ -62,6 +69,9 @@ public class PlayerMovementMultiplayer : MonoBehaviour
         playerTransf.rotation = Quaternion.Euler(0f, 0f, angle);
 
     }
+
+    float shotgunAngle = 30 * Mathf.Deg2Rad;
+
     [PunRPC]
     void RPCPlayerShoot()
     {
@@ -72,13 +82,34 @@ public class PlayerMovementMultiplayer : MonoBehaviour
 
         if (Input.GetButton("Fire1") && fireTimer <= 0)
         {
+
             fireTimer = fireCooldown;
-            PhotonNetwork.Instantiate("PlayerBullet", muzzlePosition.position, playerTransf.transform.rotation).
-            gameObject.GetComponent<Rigidbody2D>().AddForce(700 * new Vector2(dir.x, dir.y).normalized);
+            if (isShotgun)
+            {
+                PhotonNetwork.Instantiate("PlayerBullet", muzzlePosition.position, playerTransf.transform.rotation).
+                gameObject.GetComponent<Rigidbody2D>().AddForce(700 * new Vector2(dir.x * Mathf.Sin(shotgunAngle), dir.y * Mathf.Cos(shotgunAngle)).normalized);
+                PhotonNetwork.Instantiate("PlayerBullet", muzzlePosition.position, playerTransf.transform.rotation).
+                gameObject.GetComponent<Rigidbody2D>().AddForce(700 * new Vector2(dir.x * Mathf.Cos(-shotgunAngle), dir.y * Mathf.Sin(shotgunAngle)).normalized);
+                PhotonNetwork.Instantiate("PlayerBullet", muzzlePosition.position, playerTransf.transform.rotation).
+                gameObject.GetComponent<Rigidbody2D>().AddForce(700 * new Vector2(dir.x, dir.y).normalized);
+
+            }
+
+            else
+            {
+                PhotonNetwork.Instantiate("PlayerBullet", muzzlePosition.position, playerTransf.transform.rotation).
+                gameObject.GetComponent<Rigidbody2D>().AddForce(700 * new Vector2(dir.x, dir.y).normalized);
+            }
+
         }
 
 
     }
 
+    public void StartShotgun()
+    {
+        isShotgun = true;
+        shotgunTimer = 10f;
+    }
 
 }
