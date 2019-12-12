@@ -136,11 +136,14 @@ public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
         //PhotonNetwork.Instantiate("Health1Pack", this.transform.position, Quaternion.identity);
 
     }
-
     void OnTriggerEnter2D(Collider2D hit)
     {
-        if (hit.gameObject.CompareTag("PlayerBullet") || hit.gameObject.CompareTag("UltKillzone"))
+        //checa as tags que matam o inimigo -tiro do jogador e a nuke
+        
+        if (hit.gameObject.CompareTag("PlayerBullet"))
             enemyHealth--;
+        if (hit.gameObject.CompareTag("UltKillzone"))
+            enemyHealth = 0;
     }
 
 

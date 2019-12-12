@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 61389891304338624}
   - component: {fileID: -3695305335342110810}
   - component: {fileID: -6436803318954102028}
-  - component: {fileID: -3627316455426958974}
   - component: {fileID: -4120822287300972924}
   m_Layer: 10
   m_Name: DropNuke
@@ -148,18 +147,6 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
---- !u!114 &-3627316455426958974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1825343885232472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b480627dfae15241ba858fe97b451ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-4120822287300972924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f8737ba91fbf214ca22c14bc2ab60ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nukeCollider: {fileID: 1601940351088654317}
+  nukeActivated: 0
+  maxColliderScale: 1000
 --- !u!1 &1601940351088654317
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,13 +173,15 @@ GameObject:
   - component: {fileID: 6118725513867616118}
   - component: {fileID: 8332844137461451665}
   - component: {fileID: 8852723713539872786}
+  - component: {fileID: 941217960360283242}
+  - component: {fileID: 4623044702670628874}
   m_Layer: 0
-  m_Name: Nuke
+  m_Name: NukeCollider
   m_TagString: UltKillzone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6118725513867616118
 Transform:
   m_ObjectHideFlags: 0
@@ -262,9 +254,46 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.8
+--- !u!114 &941217960360283242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601940351088654317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 4623044702670628874}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &4623044702670628874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601940351088654317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
