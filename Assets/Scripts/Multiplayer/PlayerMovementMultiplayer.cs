@@ -70,11 +70,14 @@ public class PlayerMovementMultiplayer : MonoBehaviour
 
     }
 
+    //referencia de angulo para facilitar o código
     float shotgunAngle = 30 * Mathf.Deg2Rad;
 
     [PunRPC]
     void RPCPlayerShoot()
     {
+        //metodo de tiro
+
         if (!photonView.IsMine)
             return;
 
@@ -84,8 +87,10 @@ public class PlayerMovementMultiplayer : MonoBehaviour
         {
 
             fireTimer = fireCooldown;
+            //se a shotgun foi ativada, usa este tipo de tiro
             if (isShotgun)
             {
+                //3 tiros, 2 deles com angulos e um reto
                 PhotonNetwork.Instantiate("PlayerBullet", muzzlePosition.position, playerTransf.transform.rotation).
                 gameObject.GetComponent<Rigidbody2D>().AddForce(700 * new Vector2(dir.x * Mathf.Sin(shotgunAngle), dir.y * Mathf.Cos(shotgunAngle)).normalized);
                 PhotonNetwork.Instantiate("PlayerBullet", muzzlePosition.position, playerTransf.transform.rotation).
@@ -94,7 +99,7 @@ public class PlayerMovementMultiplayer : MonoBehaviour
                 gameObject.GetComponent<Rigidbody2D>().AddForce(700 * new Vector2(dir.x, dir.y).normalized);
 
             }
-
+            //se não é shotgun, usa esse tiro
             else
             {
                 PhotonNetwork.Instantiate("PlayerBullet", muzzlePosition.position, playerTransf.transform.rotation).
@@ -106,6 +111,7 @@ public class PlayerMovementMultiplayer : MonoBehaviour
 
     }
 
+    //no outro script, esse metodo é chamado quando começa a shotgun
     public void StartShotgun()
     {
         isShotgun = true;

@@ -94,15 +94,18 @@ public class PlayerHealthMultiplayer : MonoBehaviour
             Destroy(hit.gameObject);
         }
 
-        if (!isDead && hit.gameObject.CompareTag("NewWeapon"))
-        {
-            playerMovementMultiplayer.StartShotgun();
-            Destroy(hit.gameObject);
-        }
 
         if (!isDead && hit.gameObject.CompareTag("NukeDrop"))
         {
             hit.GetComponent<NukeDropManager>().ActivateNuke();
+        }
+
+        //verifica se colidiu na fruta que dá a shotgun, pela tag da fruta "DropNuke"
+        if (!isDead && hit.gameObject.CompareTag("NewWeapon"))
+        {
+            //quando colidir, começa no outro script a shotgun
+            playerMovementMultiplayer.StartShotgun();
+            Destroy(hit.gameObject);
         }
     }
 

@@ -139,7 +139,7 @@ public class EnemyMovementMultiplayer : MonoBehaviourPunCallbacks
     void OnTriggerEnter2D(Collider2D hit)
     {
         //checa as tags que matam o inimigo -tiro do jogador e a nuke
-        
+
         if (hit.gameObject.CompareTag("PlayerBullet"))
             enemyHealth--;
         if (hit.gameObject.CompareTag("UltKillzone"))
